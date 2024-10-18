@@ -86,17 +86,6 @@ This is a simple **To-Do List Web Application** built using **Flask** (a Python 
 4. **Mark Tasks as Complete**:
    - Once a task is completed, clicking on the "Mark Complete" button marks it as finished.
 
-## Screenshots
-
-### Home Page (To-Do List)
-![Home Page](./screenshots/home-page.png)
-
-### Adding a Task
-![Adding Task](./screenshots/add-task.png)
-
-### Task List with Overdue Tasks
-![Task List](./screenshots/task-list.png)
-
 ## Customization
 
 ### 1. **Changing the Background**:
