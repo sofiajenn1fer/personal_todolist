@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black; 
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .overdue {
+            color: red; 
+            font-weight: bold;
+        }
+        
+        .overdue-alert {
+            color: darkred;
+            font-weight: bold;
+        }
+
+        .form-inline input, .form-inline select {
+            margin-right: 10px;
+        }
+
+        .task-item {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mb-4">To-Do List</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <form action="/add" method="POST" class="form-inline mb-4 justify-content-center">
+            <input type="text" name="task" class="form-control mr-2" placeholder="Enter a new task" required>
+            
+            <label for="priority" class="mr-2">Priority:</label>
+            <select name="priority" id="priority" class="form-control mr-2" required>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <label for="due_date" class="mr-2">Due Date:</label>
+            <input type="date" name="due_date" id="due_date" class="form-control mr-2" required>
+            
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+        
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item task-item {% if task.is_overdue %}overdue{% endif %}">
+                    {{ task.task }} - {{ task.status }} 
+                    <span class="badge badge-secondary">Priority: {{ task.priority }}</span> 
+                    <span class="badge badge-light">Due: {{ task.due_date }}</span>
+                    
+                    {% if task.is_overdue %}
+                        <span class="overdue-alert ml-3">This task is overdue!</span>
+                    {% endif %}
+                    
+                    <div class="float-right">
+                        {% if task.status == 'Incomplete' %}
+                            <a href="/complete/{{ task.id }}" class="btn btn-sm btn-success">Mark Complete</a>
+                        {% endif %}
+                        <a href="/edit/{{ task.id }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
