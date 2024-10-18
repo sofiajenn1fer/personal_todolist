@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This is a simple **To-Do List Web Application** built using **Flask** (a Python web framework) and **SQLite** as the database. The app allows users to add, edit, and delete tasks, set priorities, and assign due dates. Overdue tasks are highlighted in red, and users can mark tasks as complete. The application has a modern design with a gradient background, transparent task containers, and uses **Bootstrap** for responsive styling.
+This is a simple **To-Do List Web Application** built using **Flask** (a Python web framework) and **SQLite** as the database. This app does not cover multiple users as it was initially made for personal use. The app allows users to add, edit, and delete tasks, set priorities, and assign due dates. Overdue tasks are highlighted in red, and users can mark tasks as complete. The application has a modern design with a gradient background, transparent task containers, and uses **Bootstrap** for responsive styling.
 
 ## Features
 
