@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This is a simple **To-Do List Web Application** built using **Flask** (a Python web framework) and **SQLite** as the database. This app does not cover multiple users as it was initially made for personal use. The app allows users to add, edit, and delete tasks, set priorities, and assign due dates. Overdue tasks are highlighted in red, and users can mark tasks as complete. The application has a modern design with a gradient background, transparent task containers, and uses **Bootstrap** for responsive styling.
+This is a simple **To-Do List Web Application** built using **Flask** (a Python web framework) and **SQLite** as the database. This app does not cover multiple users as it was initially made for personal use. The app allows users to add, edit, and delete tasks, set priorities, and assign due dates. Overdue tasks are highlighted in red, and users can mark tasks as complete.
 
 ## Features
 
@@ -13,7 +13,6 @@ This is a simple **To-Do List Web Application** built using **Flask** (a Python 
 - **Delete tasks**.
 - **Sort tasks** by priority and due date.
 - **Highlight overdue tasks** in red with an overdue message.
-- **Responsive design** using Bootstrap, with a clean, modern interface.
 
 ## Technologies Used
 
@@ -26,10 +25,8 @@ This is a simple **To-Do List Web Application** built using **Flask** (a Python 
 
 ### Prerequisites
 
-Ensure you have the following installed on your machine:
-
 - **Python 3.x**: [Download and install Python](https://www.python.org/downloads/)
-- **pip** (Python package manager): Comes with Python 3.x.
+- **pip** (Python package manager)
 
 ### Step-by-Step Installation
 
@@ -40,7 +37,7 @@ Ensure you have the following installed on your machine:
    cd todo-list-flask
    ```
 
-2. **Create a Virtual Environment (Optional but recommended)**:
+2. **Create a Virtual Environment (Optional)**:
 
    ```bash
    python -m venv venv
@@ -69,11 +66,11 @@ Ensure you have the following installed on your machine:
    python app.py
    ```
 
-   After running, open your browser and navigate to `http://127.0.0.1:5000/`.
+   After running, open browser and navigate to `http://127.0.0.1:5000/`.
 
 5. **Database Setup**:
 
-   The app will automatically create an SQLite database (`todo.db`) when you first run the app. If you need to update the database (e.g., add columns for `priority` and `due_date`), you can use the provided `update_db()` function.
+   The app will automatically create an SQLite database (`todo.db`) when first running the app. To update the database alter the `update_db()` function.
 
 ## Usage
 
@@ -87,7 +84,7 @@ Ensure you have the following installed on your machine:
    - You can click the "Edit" button to update the task or "Delete" to remove it from the list.
 
 4. **Mark Tasks as Complete**:
-   - Once a task is completed, you can click the "Mark Complete" button to mark it as finished.
+   - Once a task is completed, clicking on the "Mark Complete" button marks it as finished.
 
 ## Screenshots
 
@@ -103,7 +100,7 @@ Ensure you have the following installed on your machine:
 ## Customization
 
 ### 1. **Changing the Background**:
-   The app uses a gradient background. You can replace it with a background image or change the gradient colors in the CSS file. Modify the `body` style in the `index.html` file:
+   The app uses a gradient background. Modify the `body` style in the `index.html` file to alter the background:
 
    ```css
    body {
@@ -112,16 +109,10 @@ Ensure you have the following installed on your machine:
    ```
 
 ### 2. **Task Sorting**:
-   Tasks are sorted first by overdue status, then by priority, and finally by due date. You can adjust the SQL query in the `index` route in `app.py` to customize sorting.
+   Tasks are sorted first by overdue status, then by priority, and finally by due date. To customize sorting, adjust the SQL query in the `index` route in `app.py`.
 
 ### 3. **Styling**:
-   Bootstrap is used for styling. You can customize the appearance by modifying the Bootstrap classes or adding additional CSS rules.
-
-## Future Enhancements
-
-- **User Authentication**: Allow users to sign in and manage their own tasks.
-- **Email Notifications**: Send reminders for upcoming and overdue tasks.
-- **Tagging and Categorization**: Add support for task tags or categories to organize tasks more efficiently.
+   Bootstrap is used for styling.
 
 ## License
 
