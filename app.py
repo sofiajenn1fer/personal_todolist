@@ -41,18 +41,16 @@ def update_db():
 # displaying my tasks, through index
 @app.route('/')
 def index():
-    # storing today's date
-    today = datetime.today().date()  
+    today = datetime.today().date()  # Get today's date
     
     with sqlite3.connect('todo.db') as conn:
         cursor = conn.cursor()
-        # ordering tasks by priority, then will focus on due date
         cursor.execute("""
             SELECT * FROM tasks
             ORDER BY
-                CASE
-                    WHEN due_date < ? AND status = 'Incomplete' THEN 1  
-                    ELSE 2  
+                CASE status
+                    WHEN 'Incomplete' THEN 1
+                    WHEN 'Complete' THEN 2
                 END,
                 CASE priority
                     WHEN 'High' THEN 1
@@ -60,10 +58,10 @@ def index():
                     WHEN 'Low' THEN 3
                 END,
                 due_date ASC
-        """, (today,))
+        """)
         tasks = cursor.fetchall()
 
-    # checking if tasks are overdue
+    # Check if tasks are overdue
     task_list = []
     for task in tasks:
         task_dict = {
@@ -72,19 +70,17 @@ def index():
             'status': task[2],
             'priority': task[3],
             'due_date': task[4],
-            'is_overdue': False  
+            'is_overdue': False  # Default is not overdue
         }
-    
-        if task[4]:  
+        # Check if the task's due date is in the past
+        if task[4]:  # Ensure there is a due date
             task_due_date = datetime.strptime(task[4], '%Y-%m-%d').date()
-            if task_due_date < today and task[2] == 'Incomplete':  
+            if task_due_date < today and task[2] == 'Incomplete':  # Only mark incomplete tasks as overdue
                 task_dict['is_overdue'] = True
         
         task_list.append(task_dict)
 
     return render_template('index.html', tasks=task_list)
-
-
 
 # function to add tasks
 @app.route('/add', methods=['POST'])
@@ -167,6 +163,13 @@ def edit_task(task_id):
         task = cursor.fetchone()
     return render_template('edit.html', task=task[0], priority=task[1], due_date=task[2], task_id=task_id)
 
+# mark task as uncomplete
+@app.route('/uncomplete/<int:task_id>')
+def uncomplete_task(task_id):
+    with sqlite3.connect('todo.db') as conn:
+        conn.execute("UPDATE tasks SET status = ? WHERE id = ?", ('Incomplete', task_id))
+        conn.commit()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     init_db()  

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
@@ -88,6 +87,8 @@
                     <div class="float-right">
                         {% if task.status == 'Incomplete' %}
                             <a href="/complete/{{ task.id }}" class="btn btn-sm btn-success">Mark Complete</a>
+                        {% else %}
+                            <a href="/uncomplete/{{ task.id }}" class="btn btn-sm btn-secondary">Unmark as Complete</a>
                         {% endif %}
                         <a href="/edit/{{ task.id }}" class="btn btn-sm btn-warning">Edit</a>
                         <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Delete</a>
